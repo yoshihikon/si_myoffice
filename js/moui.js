@@ -7,7 +7,7 @@
 
 /* 実行 */
 $(function(){
-  MOUI.setMenulist();
+  MOUI.setContentsTop();
   MOUI.setAccordion();
   MOUI.setTransportation();
 });
@@ -72,8 +72,8 @@ MOUI.getUrlVars = function(){
     return vars; 
 }
 
-MOUI.setMenulist = function(){
-  $("main .moui-applymenulist").hide();
+MOUI.setContentsTop = function(){
+  $(".moui-applymenu").hide();
 }
 
 MOUI.selectMenu = function(thisObject, targetContentsId){
@@ -86,7 +86,7 @@ MOUI.selectMenu = function(thisObject, targetContentsId){
   
   //change contents
   $(".moui-dashboard").hide();
-  $(".moui-applymenulist").hide();
+  $(".moui-applymenu").hide();
   
   $(targetContentsId).show();
 }

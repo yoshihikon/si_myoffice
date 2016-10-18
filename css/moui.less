@@ -83,10 +83,11 @@
 @color-calendar-item-rest-bg: #79bf00;
 @color-calendar-item-rest-text: #ffffff;
 
-@color-menulist-bg-default: @color-base;
-@color-menulist-bg-hover: @color-accent-lighter;
-@color-menulist-border-default: @color-accent-darker;
-@color-menulist-text-default: @color-accent-darker;
+@color-applymenulist-bg-default: @color-base;
+@color-applymenulist-bg-hover: @color-accent-lighter;
+@color-applymenulist-border-default: @color-accent-darker;
+@color-applymenulist-border-hover: @color-accent;
+@color-applymenulist-text-default: @color-accent-darker;
 
 /* 装飾 */
 @radius: 3px;
@@ -249,6 +250,22 @@ select{
 }
 
 /******************************
+ * 重ね順
+******************************/
+.moui-systemheader{
+  position: relative;
+  z-index: 1002;
+}
+.moui-subinformation{
+  position: relative;
+  z-index: 1001;
+}
+.moui-maincontents-wrapper{
+  position: relative;
+  z-index: 1000;
+}
+
+/******************************
  * 共通スタイル
 ******************************/
 body{
@@ -310,13 +327,12 @@ body{
 .moui-maincontents-wrapper{
   display: flex;
   flex-direction: row;
-  padding: @margin-medium @margin-large;
   
   /* サービスメニュー */
   .moui-servicemenu{
     min-width: 320px;
     margin-right: calc(@margin-large - 12px);
-    padding: 0 12px 100px 0;
+    padding: @margin-medium 12px 100px @margin-large;
     overflow-y: auto;
     
     .moui-searchsection{
@@ -336,7 +352,7 @@ body{
       color: @color-text-title;
     }
     
-    ul.moui-menulist {
+    ul.moui-myofficemenulist {
       a,span{
         display: block;
         padding: @margin-small @margin-small @margin-small 40px;
@@ -476,20 +492,20 @@ body{
       }
       
     }
-    ul.moui-menulist > li{
+    ul.moui-myofficemenulist > li{
       border-top: 1px solid @color-border-default;
     }
-    ul.moui-menulist > li:last-child{
+    ul.moui-myofficemenulist > li:last-child{
       border-bottom: 1px solid @color-border-default;
     }
   }
-  
-  
   
   /* メインコンテンツ */
   .moui-maincontents{
     flex-grow: 1;
     overflow-y: auto;
+    
+    padding: @margin-medium @margin-large 100px 0;
   }
 }
 
@@ -501,9 +517,7 @@ body{
   .moui-dashboard{
     display: flex;
     flex-direction: column;
-
-    padding: 0 30px 100px 0;
-
+    
     .moui-module{
       margin-bottom: @margin-medium;
 
@@ -527,6 +541,9 @@ body{
     }
 
     .moui-transportation{
+      display: none;
+      
+      margin-top: @margin-medium;
       text-align: center;
 
       .moui-center{
@@ -700,7 +717,6 @@ body{
     }
 
     .moui-workovertime{
-
       h3{
         background-image: url('../images/ico/clock.svg');
       }
@@ -722,9 +738,8 @@ body{
 
       }
     }
-
+    
     .moui-application{
-
       h3{
         background-image: url('../images/ico/archive.svg');
       }
@@ -775,8 +790,8 @@ body{
         }
       }
     }
+    
     .moui-approval{
-
       h3{
         background-image: url('../images/ico/inbox.svg');
       }
@@ -831,32 +846,35 @@ body{
     }
   }
   
-  .moui-applymenulist{
+  .moui-applymenu{
     h3{
       margin: @margin-medium 0;
       font-size: @font-size-large;
     }
-  }
-  .moui-applymenulist > ul{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  .moui-applymenulist > ul > li{
-    margin: 0 @margin-small @margin-small 0;
-
-    a{
-      display: inline-block;
-      padding: @margin-small @margin-medium;
-      min-width: 300px;
-      border: 1px solid @color-menulist-border-default;
-      background-color: @color-menulist-bg-default;
-      text-decoration: none;
-      color: @color-menulist-text-default;
+    ul.moui-applymenulist{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 900px;
     }
-    a:hover{
-      background-color: @color-menulist-bg-hover;
-      color: @color-menulist-text-default;
+    ul.moui-applymenulist > li{
+      margin: 0 @margin-medium @margin-medium 0;
+
+      a{
+        display: inline-block;
+        padding: @margin-medium @margin-large;
+        min-width: 400px;
+        border: 1px solid @color-applymenulist-border-default;
+        background-color: @color-applymenulist-bg-default;
+        box-shadow: @box-shadow;
+        text-decoration: none;
+        color: @color-applymenulist-text-default;
+      }
+      a:hover{
+        border-color: @color-applymenulist-border-hover;
+        background-color: @color-applymenulist-bg-hover;
+        color: @color-applymenulist-text-default;
+      }
     }
   }
 }
