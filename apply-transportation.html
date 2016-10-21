@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>MyOFFICE</title>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="./css/reset.css">
+<link rel="stylesheet" href="./css/moui.css">
+<script src="./js/lib/jquery/jquery-3.1.0.min.js"></script>
+<script src="./js/moui-applytransportation.js"></script>
+<script>
+$(function(){
+  MOUI.setTransportation();
+  MOUI.setDate();
+  MOUI.calcBill();
+});  
+</script>
+</head>
+
+<body class="moui-popup">
+  <header class="moui-systemheader">
+    <section class="moui-systemtitle">
+      <h1>MyOFFICE</h1>
+    </section>
+    
+    <section class="moui-fujitsulogo">
+      <img src="images/logo_w.svg" height="24">
+    </section>
+  </header>
+  
+  <main class="moui-maincontents">
+    <h2>国内出張旅費後精算</h2>
+    <section class="moui-contents moui-apply-transportation">
+      <dl>
+        <dt>出張期間</dt>
+        <dd><input type="text" id="text-date1"> ~ <input type="text"  id="text-date2"></dd>
+      </dl>
+      <dl>
+        <dt>出張区分</dt>
+        <dd><select><option>日帰り</option></select></dd>
+      </dl>
+      <dl>
+        <dt>出発地</dt>
+        <dd><select><option>事務所</option></select></dd>
+        <dt>帰着地</dt>
+        <dd><select><option>自宅</option></select></dd>
+      </dl>
+      <dl>
+        <dt>出張先</dt>
+        <dd><select><option>蒲田ソリューションスクエア</option></select></dd>
+      </dl>
+      <dl>
+        <dt>出張内容</dt>
+        <dd><input type="text" size="50"></dd>
+      </dl>
+      <dl>
+        <dt>交通費</dt>
+        <dd><input type="text" id="text-bill" size="10" style="text-align:right;">&nbsp;円</dd>
+        <dt style="width:90px;">タクシー代:</dt>
+        <dd><input type="text" size="10" style="text-align:right;">&nbsp;円</dd>
+      </dl>
+      <dl>
+        <dt style="vertical-align: top;">ルート</dt>
+        <dd>
+          <ul id="moui-routelist" class="moui-routelist">
+            <!--
+            <li>
+              <label>
+                <input type="checkbox" checked>
+                <span class="moui-date">2016/00/00</span>
+                <span class="moui-station">武蔵小杉</span>
+                <span>⇢</span>
+                <span class="moui-station">蒲田</span>
+                <span class="moui-bill">198円</span>
+              </label>
+            </li>
+            <li>
+              <label>
+                <input type="checkbox" checked>
+                <span class="moui-date">2016/00/00</span>
+                <span class="moui-station">武蔵小杉</span>
+                <span>⇢</span>
+                <span class="moui-station">蒲田</span>
+                <span class="moui-bill">198円</span>
+              </label>
+            </li>
+            -->
+          </ul>
+        </dd>
+      </dl>
+      
+    </section>
+    <footer class="moui-action">
+      <button onclick="MOUI.applyTransportation()">申請</button>
+      <button onclick="MOUI.cancelApplyTransportation()">キャンセル</button>
+    </footer>
+  </main>
+  
+</body>
+</html>

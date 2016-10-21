@@ -11,7 +11,14 @@
 <link rel="stylesheet" href="./css/reset.css">
 <link rel="stylesheet" href="./css/moui.css">
 <script src="./js/lib/jquery/jquery-3.1.0.min.js"></script>
-<script src="./js/moui.js"></script>
+<script src="./js/moui-top.js"></script>
+<script>
+$(function(){
+  MOUI.setContentsTop();
+  MOUI.setAccordion();
+  MOUI.setTransportation();
+});  
+</script>
 </head>
 
 <body>
@@ -31,6 +38,7 @@
   </section>
   
   <div class="moui-maincontents-wrapper">
+    
     <nav class="moui-servicemenu">
       <section class="moui-menusection">
         <ul class="moui-myofficemenulist">
@@ -123,12 +131,11 @@
     </nav>
     
     <main class="moui-maincontents moui-top">
-     
       <div id="moui-dashboard" class="moui-dashboard">
         <section id="moui-transportation" class="moui-module moui-transportation">
-           <div class="moui-center">
-             <h3>ICカードの交通費データがあります。</h3>
-             <button id="action-apply-transportation">交通費を精算する</button>
+          <div class="moui-center">
+            <h3>ICカードの交通費データがあります。</h3>
+            <button id="action-apply-transportation" onclick="MOUI.openDialog('#moui-dialog-selecttrans')">交通費を申請する</button>
           </div>
         </section>
         <section class="moui-module moui-notice">
@@ -170,12 +177,12 @@
             <ul class="moui-calendar-contents">
               <li>
                 <span>24</span>
-                <a href="#" class="moui-item moui-item-error">差額未精算</a>
+                <a href="#" class="moui-item moui-item-error"  onclick="MOUI.applyTransportationBasic();">差額未精算</a>
               </li>
               <li><span>25</span></li>
               <li>
                 <span>26</span>
-                <a href="#" class="moui-item moui-item-error">出勤エラー</a>
+                <a href="#" class="moui-item moui-item-error"  onclick="MOUI.applyTransportationBasic();">出勤エラー</a>
               </li>
               <li><span>27</span></li>
               <li><span>28</span></li>
@@ -267,6 +274,31 @@
         </ul>
       </div>
     </main>
+    
+    <div id="moui-screen" class="moui-screen"></div>
+      
+    <div id="moui-dialog-selecttrans" class="moui-dialog moui-dialog-selecttrans">
+      <h3>交通費を申請する支払履歴を選択してください</h3>
+      <ul id="moui-routelist" class="moui-routelist">
+        <!--
+        <li>
+          <label>
+            <input type="checkbox">
+            <span class="moui-date">2016/00/00</span>
+            <span class="moui-station">武蔵小杉</span>
+            <span>⇢</span>
+            <span class="moui-station">蒲田</span>
+            <span class="moui-bill">198円</span>
+          </label>
+        </li>
+        -->
+      </ul>
+      <footer class="moui-dialog-action">
+        <button onclick="MOUI.applyTransportation()">申請する</button>
+        <button onclick="MOUI.closeDialog('#moui-dialog-selecttrans')">キャンセル</button>
+      </footer>
+    </div>
+    
   </div>
 </body>
 </html>

@@ -39,7 +39,7 @@
 @color-bg-default: @color-base;
 @color-border-default: @color-main;
 
-@color-text-title: @color-accent;
+@color-title-text: @color-accent;
 @color-text-default: @color-accent-darker;
 @color-text-link: @color-accent;
 @color-text-hover: @color-accent-highlight;
@@ -88,6 +88,12 @@
 @color-applymenulist-border-default: @color-accent-darker;
 @color-applymenulist-border-hover: @color-accent;
 @color-applymenulist-text-default: @color-accent-darker;
+
+@color-dialog-bg: @color-base;
+@color-dialog-title-text: @color-accent;
+@color-dialog-list-border: @color-main;
+
+@color-suicadata-list-border: @color-main;
 
 /* 装飾 */
 @radius: 3px;
@@ -178,6 +184,7 @@ input,textarea,select,label{
 input[type=button],
 input[type=submit],
 button{
+  
 }
 
 /* テキスト入力 */
@@ -185,6 +192,13 @@ input[type=text],
 input[type=email],
 input[type=search],
 textarea{
+  padding: @margin-thin;
+  font-size: @font-size-medium;
+}
+
+input[type=date]{
+  padding: @margin-thin;
+  font-size: @font-size-medium;
 }
 
 /* 検索ボックス */
@@ -211,6 +225,7 @@ button{
   border: none;
   background: none;
   
+  min-width: 120px;
   padding: @margin-small @margin-medium;
   border-radius: @radius;
   background: linear-gradient(@color-button-bg-g1, @color-button-bg-g2);
@@ -227,31 +242,15 @@ button:active{
 
 /* セレクトボックス */
 select{
+  padding: @margin-thin;
+  font-size: @font-size-medium;
 }
 
 /******************************
- * コンポーネント
+ * 共通スタイル：メイン
 ******************************/
-/*スペーサー*/
-.moui-spacer-large{
-  display: inline-block;
-  width: @margin-large;
-  font-size: 0;
-}
-.moui-spacer-medium{
-  display: inline-block;
-  width: @margin-medium;
-  font-size: 0;
-}
-.moui-spacer-small{
-  display: inline-block;
-  width: @margin-small;
-  font-size: 0;
-}
 
-/******************************
- * 重ね順
-******************************/
+/* 重ね順 */
 .moui-systemheader{
   position: relative;
   z-index: 1002;
@@ -265,20 +264,12 @@ select{
   z-index: 1000;
 }
 
-/******************************
- * 共通スタイル
-******************************/
-body{
-  display: flex;
-  flex-direction: column;
-}
-
 /* ヘッダー */
 .moui-systemheader{
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  min-height: 120px;
+  height: 120px;
   padding: @margin-medium @margin-large;
   background-color: @color-header-bg;
   
@@ -308,11 +299,13 @@ body{
   }
 }
 
+/* サブインフォメーション */
 .moui-subinformation{
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 12px @margin-large;
+  height: 40px;
+  padding: 0 @margin-large;
   background-color: @color-userinformation-bg;
   box-shadow: @box-shadow;
   
@@ -324,15 +317,16 @@ body{
   }
 }
 
+/* メインコンテンツ・ナビ */
 .moui-maincontents-wrapper{
   display: flex;
   flex-direction: row;
+  height: calc(~'100% - 160px'); 
   
   /* サービスメニュー */
   .moui-servicemenu{
     min-width: 320px;
-    margin-right: calc(@margin-large - 12px);
-    padding: @margin-medium 12px 100px @margin-large;
+    padding: @margin-medium 0px 100px @margin-large;
     overflow-y: auto;
     
     .moui-searchsection{
@@ -349,7 +343,7 @@ body{
     .moui-title{
       margin-bottom: @margin-small;
       font-weight: bold;
-      color: @color-text-title;
+      color: @color-title-text;
     }
     
     ul.moui-myofficemenulist {
@@ -503,10 +497,36 @@ body{
   /* メインコンテンツ */
   .moui-maincontents{
     flex-grow: 1;
+    padding: @margin-medium @margin-medium 100px @margin-medium;
     overflow-y: auto;
-    
-    padding: @margin-medium @margin-large 100px 0;
   }
+}
+
+/* スクリーン */
+.moui-screen{
+  display: none;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.5;
+}
+
+/* ダイアログ */
+.moui-dialog{
+  display: none;
+
+  position: absolute;
+  top: calc(~'50% - 200px');
+  left: calc(~'50% - 90px');
+  width: 500px;
+  height: 400px;
+  padding: @margin-small;
+  background-color: @color-dialog-bg;
+  box-shadow: @box-shadow;
 }
 
 /******************************
@@ -541,6 +561,7 @@ body{
     }
 
     .moui-transportation{
+      
       display: none;
       
       margin-top: @margin-medium;
@@ -561,7 +582,7 @@ body{
         background-size: 18px;
       }
     }
-
+    
     .moui-notice{  
       h3{
         background-image: url('../images/ico/warning.svg');
@@ -878,3 +899,188 @@ body{
     }
   }
 }
+
+/* ダイアログ */
+.moui-dialog-selecttrans{
+  h3{
+    padding: @margin-medium;
+    text-align: center;
+    color: @color-dialog-title-text;
+  }
+
+  ul.moui-routelist{
+    height: 260px;
+    border: 1px solid @color-dialog-list-border;
+    overflow-y: auto;
+  }
+  ul.moui-routelist > li{
+    border-bottom: 1px solid @color-dialog-list-border;
+
+    label{
+      display: block;
+      padding: @margin-small;
+      
+      input[type=checkbox]{
+         display: inline-block;
+        margin-right: @margin-small;
+      }
+      span{
+        display: inline-block;
+        width: 20px;
+      }
+      .moui-date{
+        display: inline-block;
+        width: 120px;
+      }
+      .moui-station{
+        display: inline-block;
+        width: 90px;
+      }
+      .moui-bill{
+        display: inline-block;
+        width: 60px;
+      }
+    }
+  }
+  ul.moui-routelist > li:last-child{
+    border-bottom: none;
+  }
+
+  .moui-dialog-action{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: @margin-medium;
+    text-align: center;
+
+    *{
+      margin-left: @margin-medium;
+    }
+    *:last-chiid{
+      margin-left: 0;
+    }
+  }
+}
+
+
+/******************************
+ * 共通スタイル：申請ウインドウ
+******************************/
+body.moui-popup{
+  min-width: auto;
+  
+  /* 重ね順 */
+  .moui-systemheader{
+    position: relative;
+    z-index: 1002;
+  }
+  .moui-maincontents{
+    position: relative;
+    z-index: 1000;
+  }
+  
+  /* ヘッダー */
+  .moui-systemheader{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 38px;
+    padding: @margin-thin @margin-medium;
+    background-color: @color-header-bg;
+    box-shadow: @box-shadow;
+
+    .moui-systemtitle{
+      flex-grow: 1;
+      margin-bottom: 3px;
+
+      h1{
+        font-family: "Fujitsu Sans";
+        font-size: @font-size-large;
+        letter-spacing: 0.3rem;
+        color: @color-header-text;
+      }
+    }
+  }
+  
+  .moui-maincontents{
+    h2{
+      font-size: @font-size-large;
+      padding: @margin-medium;
+    }
+    
+    .moui-contents.moui-apply-transportation{
+      height: 440px;
+      padding: 0 @margin-large;
+      overflow-y: auto;
+      
+      dl{
+        padding: @margin-small 0;
+        dt{
+          display: inline-block;
+          margin-left: @margin-large;
+          width: 120px;
+        }
+        dt:first-child{
+          margin-left: 0;
+        }
+        dd{
+          display: inline-block;
+        }
+      }
+      ul.moui-routelist{
+        display: block;
+        border: 1px solid @color-suicadata-list-border;
+      }
+      ul.moui-routelist > li{
+        border-bottom: 1px solid @color-dialog-list-border;
+        
+        label{
+          display: block;
+          padding: @margin-small;
+
+          input[type=checkbox]{
+            display: inline-block;
+            margin-right: @margin-small;
+          }
+          span{
+            display: inline-block;
+            width: 20px;
+          }
+          .moui-date{
+            display: inline-block;
+            width: 120px;
+          }
+          .moui-station{
+            display: inline-block;
+            width: 90px;
+          }
+          .moui-bill{
+            display: inline-block;
+            width: 60px;
+            
+          }
+        }
+      }
+      ul.moui-routelist > li:last-child{
+        border-bottom: none;
+      }
+    }
+    
+    .moui-action{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: @margin-medium;
+      text-align: center;
+
+      *{
+        margin-left: @margin-medium;
+      }
+      *:last-chiid{
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+
